@@ -33,6 +33,23 @@ class QueryBuilder
 		return $result;
 	}
 
+	public function getOne($table, $id)
+	{
+		$select = $this->queryFactory->newSelect();
+		$select->cols(['*'])
+			->from($table)
+			->where("id = :id")
+			->bindValue('id', $id);
+
+		$sth = $this->pdo->prepare($select->getStatement());
+
+		$sth->execute($select->getBindValues());
+
+		$result = $sth->fetch(PDO::FETCH_ASSOC);
+
+		return $result;
+	}
+
 	public function insert($table, $data){
 		$insert = $this->queryFactory->newInsert();
 
