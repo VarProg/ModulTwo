@@ -1,4 +1,7 @@
 <?php $this->layout('layout', ['title' => 'User Profile']) ?>
 
 <h1>User Profile</h1>
-<p>Hello, <?=$this->e($name)?></p>
+
+<?php foreach($postsInViews as $posts):?>
+<?php echo $posts['title'];?><br>
+<?php endforeach;?>
